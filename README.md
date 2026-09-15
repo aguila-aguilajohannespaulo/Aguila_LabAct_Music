@@ -1,6 +1,7 @@
 # Introduction
 Welcome to the Query Search Wiki For Music!
-How it works is User -> Startup Page -> Search Page -> app.js -> Netlify Function -> Genius API -> Search Results
+How it works is 
+User -> Startup Page -> Search Page -> app.js -> Netlify Function -> Genius API -> Search Results
 ## Prerequisites
 Before running or using the project:
 1. Create a Genius API account/application and obtain a **Client Access Token**.
