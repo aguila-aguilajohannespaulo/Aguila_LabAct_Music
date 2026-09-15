@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Genius Lyrics API Query</title>
+  <link rel="stylesheet" href="css/search.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="main">
+    <header>
+      <nav>
+        <h2>Genius Lyrics API Query</h2>
+      </nav>
+    </header>
+    <div class="hero">
+      <h1 id="headline">Genius API Query</h1>
+      <p><i>Type a keyword above or try the trending charts</i></p>
+      <form id="search-form" class="search-form-wrapper">
+        <div class="searchBar">
+          <input type="text" id="search-input" placeholder="Search for musical lyrics..." required>
+          <button type="submit" class="set-btn btn-hub" style="margin-top: 0; border: none; cursor: pointer;">Search</button>
+        </div>
+      </form>
+      <p><i>Trending Artists Buttons</i></p>
+    </div>
+    <section class="challenges">
+    <div class="button-row">
+    <button class="challenge-btn set-btn btn-act"data-query="Billie Eilish">Billie Eilish</button>
+    <button class="challenge-btn set-btn btn-ft"data-query="The Weeknd">The Weeknd</button>
+    <button class="challenge-btn set-btn btn-act" data-query="Taylor Swift">Taylor Swift</button>
+    <button class="challenge-btn set-btn btn-ft" data-query="Bruno Mars">Bruno Mars</button>
+    </div>
+    </section>
+
+    <div id="loading-indicator" class="hidden">
+      <div class="spinner"></div>
+      <p style="text-align: center; color: #cdda86; font-weight: 600;">Retrieving beautiful media...</p>
+    </div>
+
+    <div id="error-banner" class="error-banner hidden"></div>
+
+    <div class="items" id="results-grid">
+    </div>
+  </div>
+    <canvas id="noise"></canvas>
+<script src="js/particles.js" defer></script>
+  <script>
+    // Title Randomizer Animation 
+    const title = document.getElementById("headline");
+    const originalText = title.innerText;
+    const words = ["Check them out!", "Search Anything", "Random Thoughts", "Genius API", "Searching..."];
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890.,/';[]]!@#$^*()_+=";
+
+    function scrambleTo(target, callback) {
+      let iteration = 0;
+      const interval = setInterval(() => {
+        title.innerText = target
+          .split("")
+          .map((letter, index) => {
+            if (index < iteration) return target[index];
+            return letters[Math.floor(Math.random() * letters.length)];
+          })
+          .join("");
+
+        if (iteration >= target.length) {
+          clearInterval(interval);
+          if (callback) callback();
+        }
+
+        iteration += 1 / 2;
+      }, 50);
+    }
+
+    function runAnimation() {
+      const randomWord = words[Math.floor(Math.random() * words.length)];
+      scrambleTo(randomWord, () => {
+        setTimeout(() => {
+          scrambleTo(originalText);
+        }, 1500);
+      });
+    }
+    setInterval(runAnimation, 10000);
+  </script>
+</body>
